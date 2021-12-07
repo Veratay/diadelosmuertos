@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Dia De Los Muertos Cemeteries</title>
+    <style>
+      body {
+		width: 100vw;
+		margin:  0px;
+        background-image: url(https://drive.google.com/uc?export=view&id=1NmOUenNYIBXb7h2B2YwqJugx4xwz0Jw0);
+		background-repeat: no-repeat;
+  		background-size: cover;
+      }
+      #main_heading {
+		width: 80vw;
+		padding-top: 3vh;
+		margin: auto;
+		font-size: 4vh;
+		color: white;
+        text-align: center;
+      }
+	  #author_heading {
+        height: 3vh;
+		width: 80vw;
+		padding-top: 3vh;
+		margin: auto;
+		font-size: 1.5vh;
+		color: lightgray;
+        text-align: center;
+      }
+      #main_wrapper {
+		height: 200vh;
+		  overflow: auto;
+        padding: 5vw;
+		width: 70vw;
+		margin: auto;
+		margin-top: 5vh;
+		margin-bottom: 1vh;
+		background-color: azure;
+      }
+    .img-comp-container {
+      position: relative;
+      height: 40vw; /*should be the same height as the images*/
+		margin-bottom: 5vh;
+    }
+
+    .img-comp-img {
+      position: absolute;
+      width: auto;
+      height: auto;
+      overflow:hidden;
+    }
+
+    .img-comp-img img {
+      display:block;
+      vertical-align:middle;
+    }
+
+    .img-comp-slider {
+      position: absolute;
+      z-index:9;
+      cursor: ew-resize;
+      /*set the appearance of the slider:*/
+      width: 40px;
+      height: 40px;
+      background-color: #2196F3;
+      opacity: 0.7;
+      border-radius: 50%;
+    }
+		.SliderImg {
+			width: 70vw;
+			height: 40vw;
+		}
+		.maintext {
+			text-align: center;
+			margin: 0px;
+			padding: 1vh;
+		}
+		.slidertooltip {
+			text-align: center;
+			font-style: italic;
+			color: gray;
+		}
+</style>
+<script>
+    function initComparisons() {
+      var x, i;
+      /*find all elements with an "overlay" class:*/
+      x = document.getElementsByClassName("img-comp-overlay");
+      for (i = 0; i < x.length; i++) {
+        /*once for each "overlay" element:
+        pass the "overlay" element as a parameter when executing the compareImages function:*/
+        compareImages(x[i]);
+      }
+      function compareImages(img) {
+        var slider, img, clicked = 0, w, h;
+        /*get the width and height of the img element*/
+        w = img.offsetWidth;
+        h = img.offsetHeight;
+        /*set the width of the img element to 50%:*/
+        img.style.width = (w / 2) + "px";
+        /*create slider:*/
+        slider = document.createElement("DIV");
+        slider.setAttribute("class", "img-comp-slider");
+        /*insert slider*/
+        img.parentElement.insertBefore(slider, img);
+        /*position the slider in the middle:*/
+        slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+        slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+        /*execute a function when the mouse button is pressed:*/
+        slider.addEventListener("mousedown", slideReady);
+        /*and another function when the mouse button is released:*/
+        window.addEventListener("mouseup", slideFinish);
+        /*or touched (for touch screens:*/
+        slider.addEventListener("touchstart", slideReady);
+        /*and released (for touch screens:*/
+        window.addEventListener("touchend", slideFinish);
+        function slideReady(e) {
+          /*prevent any other actions that may occur when moving over the image:*/
+          e.preventDefault();
+          /*the slider is now clicked and ready to move:*/
+          clicked = 1;
+          /*execute a function when the slider is moved:*/
+          window.addEventListener("mousemove", slideMove);
+          window.addEventListener("touchmove", slideMove);
+        }
+        function slideFinish() {
+          /*the slider is no longer clicked:*/
+          clicked = 0;
+        }
+        function slideMove(e) {
+          var pos;
+          /*if the slider is no longer clicked, exit this function:*/
+          if (clicked == 0) return false;
+          /*get the cursor's x position:*/
+          pos = getCursorPos(e)
+          /*prevent the slider from being positioned outside the image:*/
+          if (pos < 0) pos = 0;
+          if (pos > w) pos = w;
+          /*execute a function that will resize the overlay image according to the cursor:*/
+          slide(pos);
+        }
+        function getCursorPos(e) {
+          var a, x = 0;
+          e = (e.changedTouches) ? e.changedTouches[0] : e;
+          /*get the x positions of the image:*/
+          a = img.getBoundingClientRect();
+          /*calculate the cursor's x coordinate, relative to the image:*/
+          x = e.pageX - a.left;
+          /*consider any page scrolling:*/
+          x = x - window.pageXOffset;
+          return x;
+        }
+        function slide(x) {
+          /*resize the image:*/
+          img.style.width = x + "px";
+          /*position the slider:*/
+          slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+        }
+      }
+    }
+</script>
+	</head>
+  <body>
+    <h1 id="main_heading">Dia De Los Muertos Cemeteries</h1>
+	<h3 id="author_heading">By Sidney Robinson, Gerry McCarthy, and Thomas Fasan</h3>
+    <div id="main_wrapper">
+		<p class = "maintext">Hey! In this website you will be able to see how a cemetery would be decorated for Dia De Los Muertos. Below you can see the before/after.</p>
+		<p class = "slidertooltip">Hint: Drag the blue circle left to right to compare the two images.</p>
+		<div class="img-comp-container">
+          <div class="img-comp-img">
+            <img src="https://drive.google.com/uc?export=view&id=1IFPQVykRI1E2kIPac_xDTjkD3rCmYKFP" class="SliderImg">
+          </div>
+          <div class="img-comp-img img-comp-overlay">
+            <img src="https://drive.google.com/uc?export=view&id=1V9LaLIKtET8590ECry-nUsbWrFm30gBZ" class="SliderImg">
+          </div>
+        </div>
+		<p class = "maintext">It looks much better right? But What is used to decorate it? Why? That is what we will get into. Now keep in mind that the following decoration steps are not in order. This is just the order that I happened to 3d model it in.</p>
+		<p class = "maintext">1. Candles. Candles are lit to guide spirits back to their graves, like a beacon. (also just to provide illumination)</p>
+		<p class = "slidertooltip">Hint: Drag the blue circle left to right to compare the two images.</p>
+		<div class="img-comp-container">
+          <div class="img-comp-img">
+            <img src="https://drive.google.com/uc?export=view&id=1IFPQVykRI1E2kIPac_xDTjkD3rCmYKFP" class="SliderImg">
+          </div>
+          <div class="img-comp-img img-comp-overlay">
+            <img src="https://drive.google.com/uc?export=view&id=13cQ53BkQLtXGCQAs376du6pFmqtCjgKc" class="SliderImg">
+          </div>
+        </div>
+		<p class = "maintext">2. Marigolds. Marigolds are flowers that symbolize death, and they are believed to help guide spirits to their altars because of their smell.</p>
+		<p class = "slidertooltip">Hint: Drag the blue circle left to right to compare the two images.</p>
+		<div class="img-comp-container">
+          <div class="img-comp-img">
+            <img src="https://drive.google.com/uc?export=view&id=13cQ53BkQLtXGCQAs376du6pFmqtCjgKc" class="SliderImg">
+          </div>
+          <div class="img-comp-img img-comp-overlay">
+            <img src="https://drive.google.com/uc?export=view&id=1j2-ouHRT2pldRZ9ljxsSZcEH8dPiLFzV" class="SliderImg">
+          </div>
+        </div>
+		<p class = "maintext">3. Ofrendas and Papel Picado are also used. Papel Picado is a traditional decoration for Dia De Los Muertos, and ofrendas are created as an alter for the spirits.</p>
+		<p class = "slidertooltip">Hint: Drag the blue circle left to right to compare the two images.</p>
+		<div class="img-comp-container">
+          <div class="img-comp-img">
+            <img src="https://drive.google.com/uc?export=view&id=1j2-ouHRT2pldRZ9ljxsSZcEH8dPiLFzV" class="SliderImg">
+          </div>
+          <div class="img-comp-img img-comp-overlay">
+            <img src="https://drive.google.com/uc?export=view&id=1V9LaLIKtET8590ECry-nUsbWrFm30gBZ/" class="SliderImg">
+          </div>
+        </div>
+		<p class = "maintext">And now you know how cemeteries are decorated and why.</p>
+		<p class = "slidertooltip">By the way the rendered scene was over 4200000 triangle so theres no way that can be displayed on a website, but if you are interested here is a link to the .blend file. </p>
+		<a href="https://drive.google.com/file/d/1FSPgeoMjLZDb4cplMwGIcjOBGkigg2CP/view?usp=sharing" download>
+			<p class = "slidertooltip">Download</p>
+		</a>
+    </div>
+	<script>
+		initComparisons();
+	</script>
+  </body>
+</html>
